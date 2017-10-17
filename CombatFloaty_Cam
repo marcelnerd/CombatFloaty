@@ -9,7 +9,7 @@
 using namespace std;
 
 //*****FUNCTION PROTOTYPES*****//
-void checkIfInArray(int, int, int, bool &);
+void checkShipInArray(int, int, int, bool &);
 void placeShips(int, int);
 
 //*****VARIABLE DECLARATIONS*****//
@@ -31,7 +31,7 @@ int main() {
 		while (isInArray == false) {
 			cout << "You have one ship on an 8 by 8 board. What are the coordinants of where would you like to place the front of your ship?" << endl;
 			cin >> curCo1; cin >> curCo2;
-			checkIfInArray(curCo1, curCo2, maxSub, isInArray);
+			checkShipInArray(curCo1, curCo2, maxSub, isInArray);
 		}
 		placeShips(curCo1, curCo2);
 		//GENERATE ENEMY BOARD FUNCTION
@@ -49,14 +49,14 @@ int main() {
 
 //*****FUNCTION DEFINITIONS*****//
 
-void checkIfInArray(int co1, int co2, int maxSub, bool &inArray) {
+void checkShipInArray(int co1, int co2, int maxSub, bool &inArray) {
 	inArray = false;
 	if (co1 <= maxSub && co2 <= maxSub && co1 >= 0 && co2 >= 0) {
 		inArray = true;
 		return;
 	}
 	else {
-		cout << "Invlad Coordinants" << endl;
+		cout << "Invalid Coordinants" << endl;
 		inArray = false;
 		return;
 	}
@@ -64,8 +64,17 @@ void checkIfInArray(int co1, int co2, int maxSub, bool &inArray) {
 }
 
 void placeShips(int cor1, int cor2) {
-	playerGrid[cor1][cor2] = '#';
-	playerGrid[cor1 - 1][cor2 - 1] = '#';
-	playerGrid[cor1 - 2][cor2 - 2] = '#';
+	int tempCor1 = cor1 - 2, tempCor2 = cor2 - 2;
+	checkShipInArray(tempCor1, tempCor2, maxSub, isInArray);
+	if (isInArray == true) {
+		playerGrid[cor1][cor2] = '#';
+		playerGrid[cor1 - 1][cor2 - 1] = '#';
+		playerGrid[cor1 - 2][cor2 - 2] = '#';
+	}
+	else {
+		playerGrid[cor1][cor2] = '#';
+		playerGrid[cor1 + 1][cor2 + 1] = '#';
+		playerGrid[cor1 + 2][cor2 + 2] = '#';
+	}
 	return;
 }

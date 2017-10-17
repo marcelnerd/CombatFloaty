@@ -1,0 +1,35 @@
+// Battleship.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <math.h>
+using namespace std;
+
+char playerGrid[8][8] = {'~'};
+char enemyGrid[8][8] = {'~'};
+int curCo1, curCo2, atakCoor, shipsRemaining;
+
+
+int main() {
+
+	while(shipsRemaining > 0) {
+
+    cout << "Welcome to Battlefloaty 2017" << endl << endl << "You have one ship on an 8 by 8 board. What are the coordinants of where would you like to place the front of your ship?" << endl;
+    cin >> curCo1; cin >> curCo2;
+    //ERROR FUNCTION
+    //SHIP PLACEMENT FUNCTION
+    //GENERATE ENEMY BOARD FUNCTION
+    cout << "Ready for battle." << endl;
+    cout << "Where would you like to shoot?" << endl;
+    cin >> atakCoor;
+    //ERROR FUNCTION
+    //HITCHECK FUNCTION
+    //ENEMY TURN FUNCTION
+
+	}
+
+	return 0;
+}

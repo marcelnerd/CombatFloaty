@@ -39,10 +39,11 @@ int main() {
 			}
 			placeShips(curCo1, curCo2);
 
+		cout << "Ready for battle." << endl;
+
 	while (playerShipsRemaining > 0 && enemyShipsRemaining > 0) {
 
 		isInArray = false;
-		cout << "Ready for battle." << endl;
 		cout << "What is the Y coordinant of where you would like to shoot?" << endl;
 		cin >> atakCoor1;
 		cout << "What is the X coordinant of where you would like to shoot?" << endl;

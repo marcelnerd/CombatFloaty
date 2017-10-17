@@ -1,4 +1,4 @@
-// Battleship.cpp : Defines the entry point for the console application.
+// CombatFloaty.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -8,28 +8,64 @@
 #include <math.h>
 using namespace std;
 
-char playerGrid[8][8] = {'~'};
-char enemyGrid[8][8] = {'~'};
-int curCo1, curCo2, atakCoor, shipsRemaining;
+//*****FUNCTION PROTOTYPES*****//
+void checkIfInArray(int, int, int, bool &);
+void placeShips(int, int);
+
+//*****VARIABLE DECLARATIONS*****//
+char playerGrid[8][8] = { '~' };
+char enemyGrid[8][8] = { '~' };
+int curCo1, curCo2; //Currently entered coordinants
+int atakCoor; //Coordinants of attack
+int playerShipsRemaining = 1, enemyShipsRemaining = 1; //Count of remaining ships
+int maxSub = 7; //Maximum subscript of the arrays
+bool isInArray = false;
 
 
 int main() {
 
-	while(shipsRemaining > 0) {
+	while (playerShipsRemaining > 0 && enemyShipsRemaining > 0) {
 
-    cout << "Welcome to Battlefloaty 2017" << endl << endl << "You have one ship on an 8 by 8 board. What are the coordinants of where would you like to place the front of your ship?" << endl;
-    cin >> curCo1; cin >> curCo2;
-    //ERROR FUNCTION
-    //SHIP PLACEMENT FUNCTION
-    //GENERATE ENEMY BOARD FUNCTION
-    cout << "Ready for battle." << endl;
-    cout << "Where would you like to shoot?" << endl;
-    cin >> atakCoor;
-    //ERROR FUNCTION
-    //HITCHECK FUNCTION
-    //ENEMY TURN FUNCTION
+		isInArray = false;
+		cout << "Welcome to CombatFloaty 2017" << endl << endl;
+		while (isInArray == false) {
+			cout << "You have one ship on an 8 by 8 board. What are the coordinants of where would you like to place the front of your ship?" << endl;
+			cin >> curCo1; cin >> curCo2;
+			checkIfInArray(curCo1, curCo2, maxSub, isInArray);
+		}
+		placeShips(curCo1, curCo2);
+		//GENERATE ENEMY BOARD FUNCTION
+		cout << "Ready for battle." << endl;
+		cout << "Where would you like to shoot?" << endl;
+		cin >> atakCoor;
+		//ERROR FUNCTION
+		//HITCHECK FUNCTION
+		//ENEMY TURN FUNCTION
 
 	}
 
 	return 0;
+}
+
+//*****FUNCTION DEFINITIONS*****//
+
+void checkIfInArray(int co1, int co2, int maxSub, bool &inArray) {
+	inArray = false;
+	if (co1 <= maxSub && co2 <= maxSub && co1 >= 0 && co2 >= 0) {
+		inArray = true;
+		return;
+	}
+	else {
+		cout << "Invlad Coordinants" << endl;
+		inArray = false;
+		return;
+	}
+
+}
+
+void placeShips(int cor1, int cor2) {
+	playerGrid[cor1][cor2] = '#';
+	playerGrid[cor1 - 1][cor2 - 1] = '#';
+	playerGrid[cor1 - 2][cor2 - 2] = '#';
+	return;
 }

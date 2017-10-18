@@ -15,11 +15,11 @@ void checkShipInArray(int, int, int, bool &); //Checks if the coordinants for th
 void placeShips(int, int); //Places the ships on the player's board
 void generateEnemyBoard(int, int); //Generates the enemy board
 void checkHit(int, int); //Checks if the player hit an enemy ship
-bool checkCoords(int, int);
+bool checkCoords(int, int); //Checks if the coordinants entered are valid
 
 //*****VARIABLE DECLARATIONS*****//
-char playerGrid[8][8] = { '~' };
 char enemyGrid[8][8] = { '~' };
+char playerGrid[8][8] = {'~'};
 int curCo1, curCo2; //Currently entered coordinants
 int atakCoor1, atakCoor2; //Coordinants of attack
 int playerShipsRemaining = 1, enemyShipsRemaining = 1; //Count of remaining ships
@@ -29,30 +29,47 @@ int randNum1, randNum2; //Random numbers used for generation of enemy board
 
 int main() {
 
+	for (int i = 0; i < 8; i++) {
+		for (int l = 0; l < 8; l++) {
+			enemyGrid[i][l] = '~';
+		}
+	}
+
 	srand(static_cast<int>(time(0)));
 	randNum1 = 0 + rand() % (7 - 0 + 1);
 	randNum2 = 0 + rand() % (7 - 0 + 1);
 
 	cout << "Welcome to CombatFloaty 2017" << endl << endl;
-	while (shipIsInArray == false) {
+	do {
 		cout << "You have one ship on an 8 by 8 board. What is the Y coordinant of where would you like to place the front of your ship?" << endl;
 		cin >> curCo1;
 		cout << "What is the X coordinant of where you would like to place the front of your ship?" << endl;
 		cin >> curCo2;
 		checkShipInArray(curCo1, curCo2, maxSub, shipIsInArray);
-	}
+	} while (shipIsInArray == false);
+
 		placeShips(curCo1, curCo2);
 		generateEnemyBoard(randNum1, randNum2);
 		cout << "Ready for battle." << endl;
+		
 
-	while (playerShipsRemaining > 0 && enemyShipsRemaining > 0) {
+	while(playerShipsRemaining > 0 && enemyShipsRemaining > 0) {
 
-		shipIsInArray = false;
-		cout << "What is the Y coordinant of where you would like to shoot?" << endl;
-		cin >> atakCoor1;
-		cout << "What is the X coordinant of where you would like to shoot?" << endl;
-		cin >> atakCoor2;
-		//ERROR FUNCTION
+		for (int i = 0; i < 8; i++) {
+			for (int l = 0; l < 8; l++) {
+				cout << enemyGrid[i][l];
+			}
+			cout << endl;
+		}
+
+		do {
+			cout << "What is the Y coordinant of where you would like to shoot?" << endl;
+			cin >> atakCoor1;
+			cout << "What is the X coordinant of where you would like to shoot?" << endl;
+			cin >> atakCoor2;
+			coorIsInArray = checkCoords(atakCoor1, atakCoor2);
+		} while (coorIsInArray == false);
+
 		checkHit(atakCoor1, atakCoor2);
 		//ENEMY TURN FUNCTION
 
@@ -63,7 +80,7 @@ int main() {
 
 //*****FUNCTION DEFINITIONS*****//
 
-void checkShipInArray(int co1, int co2, int maxSub, bool &inArray) { //Checks if the coordinants for the ship placement are valid.
+void checkShipInArray(int co1, int co2, int maxSub, bool &inArray) { //Checks if the coordinants for the ship placement are valid
 	inArray = false;
 	if (co1 <= maxSub && co2 <= maxSub && co1 >= 0 && co2 >= 0) {
 		inArray = true;
@@ -99,13 +116,13 @@ void generateEnemyBoard(int num1, int num2) { //Generates the enemy board
 	checkShipInArray(tempNum1, tempNum2, maxSub, shipIsInArray);
 	if (shipIsInArray == true) {
 		enemyGrid[num1][num2] = '#';
-		enemyGrid[num1 - 1][num2 - 1] = '#';
-		enemyGrid[num1 - 2][num2 - 2] = '#';
+		enemyGrid[num1 - 1][num2] = '#';
+		enemyGrid[num1 - 2][num2] = '#';
 	}
 	else {
 		enemyGrid[num1][num2] = '#';
-		enemyGrid[num1 + 1][num2 + 1] = '#';
-		enemyGrid[num1 + 2][num2 + 2] = '#';
+		enemyGrid[num1 + 1][num2] = '#';
+		enemyGrid[num1 + 2][num2] = '#';
 	}
 }
 
@@ -122,11 +139,12 @@ void checkHit(int co1, int co2) {	//Checks if the player hit an enemy ship
 	return;
 }
 
-bool checkCoords(int co1, int co2) {
+bool checkCoords(int co1, int co2) { //Checks if the coordinants entered are valid
 	if (co1 <= maxSub && co2 <= maxSub && co1 >= 0 && co2 >= 0) {
 		return true;
 	}
 	else {
+		cout << "Invlalid Coordinants" << endl;
 		return false;
 	}
 }

@@ -22,20 +22,18 @@ bool checkRemainingShips(); //Checks how many ships remain
 //*****VARIABLE DECLARATIONS*****//
 char enemyGrid[8][8] = {'~'};
 char playerGrid[8][8] = {'~'};
+char playerEnemView[8][8] = {'~'};
 int curCo1, curCo2; //Currently entered coordinants
 int atakCoor1, atakCoor2; //Coordinants of attack
 int playerShipsRemaining = 1, enemyShipsRemaining = 1; //Count of remaining ships
 int maxSub = 7; //Maximum subscript of the arrays
 bool shipIsInArray = false, coorIsInArray, shipsRemain = true;
 int randNum1, randNum2; //Random numbers used for generation of enemy board
+void setBoards(); //Fills the grids
 
 int main() {
 
-	for (int i = 0; i < 8; i++) {
-		for (int l = 0; l < 8; l++) {
-			enemyGrid[i][l] = '~';
-		}
-	}
+	setBoards();
 
 	srand(static_cast<int>(time(0)));
 	randNum1 = 0 + rand() % (7 - 0 + 1);
@@ -52,14 +50,24 @@ int main() {
 
 		placeShips(curCo1, curCo2);
 		generateEnemyBoard(randNum1, randNum2);
-		cout << "Ready for battle." << endl;
+		cout << "Ready for battle." << endl << endl;
 		
 
 	while(shipsRemain == true) {
 
+		cout << "Enemy Board" << endl;
 		for (int i = 0; i < 8; i++) {
 			for (int l = 0; l < 8; l++) {
 				cout << enemyGrid[i][l];
+			}
+			cout << endl;
+		}
+
+		
+		cout << endl << "Player View of Enemy Board" << endl;
+		for (int i = 0; i < 8; i++) {
+			for (int l = 0; l < 8; l++) {
+				cout << playerEnemView[i][l];
 			}
 			cout << endl;
 		}
@@ -135,10 +143,12 @@ void checkHit(int co1, int co2) {	//Checks if the player hit an enemy ship
 	if (enemyGrid[co1][co2] == '#') {
 		cout << "You hit an enemy ship!" << endl;
 		enemyGrid[co1][co2] = '!';
+		playerEnemView[co1][co2] = '!';
 	}
 	else {
 		cout << "You missed." << endl;
 		enemyGrid[co1][co2] = '@';
+		playerEnemView[co1][co2] = '@';
 	}
 
 	return;
@@ -179,5 +189,25 @@ bool checkRemainingShips() { //Checks how many ships remain
 	}
 	else {
 		return true;
+	}
+}
+
+void setBoards() {
+	for (int i = 0; i < 8; i++) {
+		for (int l = 0; l < 8; l++) {
+			enemyGrid[i][l] = '~';
+		}
+	}
+
+	for (int i = 0; i < 8; i++) {
+		for (int l = 0; l < 8; l++) {
+			playerGrid[i][l] = '~';
+		}
+	}
+
+	for (int i = 0; i < 8; i++) {
+		for (int l = 0; l < 8; l++) {
+			playerEnemView[i][l] = '~';
+		}
 	}
 }

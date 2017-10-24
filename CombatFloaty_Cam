@@ -9,6 +9,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
 using namespace std;
 
 //*****FUNCTION PROTOTYPES*****//
@@ -28,13 +29,15 @@ char playerEnemView[9][9] = { '0' };
 int curCo1, curCo2; //Currently entered coordinants
 int atakCoor1, atakCoor2; //Coordinants of attack
 int playerShipsRemaining = 1, enemyShipsRemaining = 1; //Count of remaining ships
-int maxSub = 7; //Maximum subscript of the arrays
+int maxSub = 8; //Maximum subscript of the arrays
 bool shipIsInArray = false, coorIsInArray, shipsRemain = true;
 int randNum1, randNum2; //Random numbers used for generation of enemy board
 void setBoards(); //Fills the grids
 
 int main() {
 
+	ofstream outFile;
+	outFile.open("FinalScore.txt", ios::out);
 	setBoards();
 	srand(static_cast<int>(time(0)));
 	randNum1 = 1 + rand() % (8 - 1 + 1);
@@ -97,6 +100,14 @@ int main() {
 	}
 
 	cout << "Game Over" << endl;
+
+	for (int i = 0; i < 9; i++) {
+			for (int l = 0; l < 9; l++) {
+				outFile << enemyGrid[i][l];
+			}
+			outFile << endl;
+		}
+	
 
 	return 0;
 }

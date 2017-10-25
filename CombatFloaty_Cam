@@ -239,11 +239,11 @@ void enemyTurn() {
 
 void checkEnemyHit(int co1, int co2) {
 	if (playerGrid[co1][co2] == '#') {
-		cout << "You hit an enemy ship!" << endl;
+		cout << "The enemy hit one of your ships!" << endl;
 		playerGrid[co1][co2] = '!';
 	}
 	else {
-		cout << "You missed." << endl;
+		cout << "The enemy missed." << endl;
 		playerGrid[co1][co2] = '@';
 	}
 

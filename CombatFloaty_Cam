@@ -1,6 +1,6 @@
 // CombatFloaty.cpp : Defines the entry point for the console application.
 // Created 10/16/17
-// Structured and written by Cameron McCoy with occasional (and appreciated) advice and commentary from Nichol He
+// Structured and written by Cameron McCoy with occasional (and appreciated) advice and commentary from Nichol He and Mr. Leonard Gregory Gardener
 
 #include "stdafx.h"
 #include <iostream>

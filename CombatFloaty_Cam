@@ -21,6 +21,7 @@ bool checkCoords(int, int); //Checks if the coordinants entered are valid
 bool checkRemainingShips(); //Checks how many ships remain
 void enemyTurn(); //The entire enemy turn
 void checkEnemyHit(int, int);
+void displayBoards(); // Displays the active playing grids as seen by the player
 
 							//*****VARIABLE DECLARATIONS*****//
 char enemyGrid[9][9] = { '0' };
@@ -60,31 +61,8 @@ int main() {
 
 	while (shipsRemain == true) {
 
-		cout << "Enemy Board" << endl;
-		for (int i = 0; i < 9; i++) {
-			for (int l = 0; l < 9; l++) {
-				cout << enemyGrid[i][l];
-			}
-			cout << endl;
-		}
-
-
-		cout << endl << "Player View of Enemy Board" << endl;
-		for (int i = 0; i < 9; i++) {
-			for (int l = 0; l < 9; l++) {
-				cout << playerEnemView[i][l];
-			}
-			cout << endl;
-		}
-
-		cout << endl << "Player Board" << endl;
-		for (int i = 0; i < 9; i++) {
-			for (int l = 0; l < 9; l++) {
-				cout << playerGrid[i][l];
-			}
-			cout << endl;
-		}
-
+        displayBoards();
+        
 		do {
 			cout << "What is the Y coordinant of where you would like to shoot?" << endl;
 			cin >> atakCoor1;
@@ -269,4 +247,33 @@ void checkEnemyHit(int co1, int co2) {
 	}
 
 	return;
+	
+}
+
+void displayBoards() {
+    
+    /* cout << "Enemy Board" << endl;
+		for (int i = 0; i < 9; i++) {
+			for (int l = 0; l < 9; l++) {
+				cout << enemyGrid[i][l];
+			}
+			cout << endl;
+		}
+*/
+
+		cout << endl << "Player View of Enemy Board" << endl;
+		for (int i = 0; i < 9; i++) {
+			for (int l = 0; l < 9; l++) {
+				cout << playerEnemView[i][l];
+			}
+			cout << endl;
+		}
+
+		cout << endl << "Player Board" << endl;
+		for (int i = 0; i < 9; i++) {
+			for (int l = 0; l < 9; l++) {
+				cout << playerGrid[i][l];
+			}
+			cout << endl;
+		}
 }

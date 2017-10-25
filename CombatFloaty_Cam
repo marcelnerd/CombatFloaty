@@ -21,6 +21,7 @@ bool checkCoords(int, int); //Checks if the coordinants entered are valid
 bool checkRemainingShips(); //Checks how many ships remain
 void enemyTurn(); //The entire enemy turn
 void checkEnemyHit(int, int);
+void setBoards(); //Fills the grids
 void displayBoards(); // Displays the active playing grids as seen by the player
 
 							//*****VARIABLE DECLARATIONS*****//
@@ -33,7 +34,7 @@ int playerShipsRemaining = 1, enemyShipsRemaining = 1; //Count of remaining ship
 int maxSub = 8; //Maximum subscript of the arrays
 bool shipIsInArray = false, coorIsInArray, shipsRemain = true;
 int randNum1, randNum2; //Random numbers used for generation of enemy board
-void setBoards(); //Fills the grids
+
 
 int main() {
 

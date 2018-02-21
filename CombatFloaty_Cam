@@ -59,7 +59,7 @@ int main() {
 	generateEnemyBoard(randNum1, randNum2);
 	cout << "Ready for battle." << endl << endl;
 
-
+	
 	while (shipsRemain == true) {
 
         displayBoards();
